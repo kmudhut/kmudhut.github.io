@@ -7,11 +7,13 @@ body
 {
     overflow-x: hidden;
     font-family: 'Roboto Condensed', sans-serif;
+    
 }
 
 .main-wrapper
 {
     height:100vh;
+    background-color: #eee;
 }
 
 .header-wrapper
@@ -30,14 +32,69 @@ body
 
 .task-list-wrapper
 {
-    height: 85%;
-    max-height: 85%;
-    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    height: calc(90% - 300px);
+    max-height: 90%;
 }
 
 .task-list
 {
+    height:100%;
+    overflow-y: auto;
+    margin:0;
     padding:0;
+    background-color: #eee;
+}
+
+.task-list-placeholder-empty
+{
+    img
+    {
+        width:45%;
+        height:auto;
+        max-width: 624px;
+        max-height: 512px;
+    }
+    h2
+    {
+        margin-top: 25px;
+        font-weight: bold;
+    }
+    h6
+    {
+
+    }
+    display: flex;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.task-list-placeholder-done
+{
+    img
+    {
+        width:30%;
+        height:auto;
+        max-width: 512x;
+        max-height: 512px;
+    }
+    h2
+    {
+        margin-top: 25px;
+        font-weight: bold;
+    }
+    h6
+    {
+
+    }
+    display: none;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .task
@@ -46,9 +103,15 @@ body
     justify-content: space-between;
     list-style-type: none;
     border-radius:10px;
-    background-color: #eee;
+    background-color: #fff;
     padding: 20px 10px 20px 10px;
     margin-bottom:5px;
+    // background-color: ;
+    -webkit-box-shadow: 0px 0px 7px -4px rgba(0, 0, 0, 0.67);
+    -moz-box-shadow: 0px 0px 7px -4px rgba(0, 0, 0, 0.67);
+    box-shadow: 0px 0px 7px -4px rgba(0, 0, 0, 0.67);
+    
+
 }
 
 .task-info-wrapper
@@ -84,8 +147,9 @@ body
 .deadline-badge
 {
     height: min-content;
+    line-height: 1;
     font-size: 11px;
-    padding: 2px 6px 2px 6px;
+    padding: 4px 6px 4px 6px;
     margin: 0 5px 0 0px;
     background-color: cornflowerblue;
     color: white;
@@ -145,7 +209,42 @@ body
 
 .add-new-item-popup
 {
-    display: none;
+    display: flex;
+    margin:0 auto 0 auto;
+    height: 300px;
+    max-height: 300px;
+    padding:10px 10% 35px 10%;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+.add-new-item-popup form
+{
+    display: flex;
+    width:100%;
+    flex-direction: column;
+}
+
+.add-new-item-popup input
+{
+    height: 40px;
+    margin:10px 0 10px 0;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: 5px 10px 5px 10px;
+}
+
+.add-new-item-popup button
+{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    width:37%;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: 5px 10px 5px 10px;
+    margin:10px auto 10px auto;
 }
 
 footer
