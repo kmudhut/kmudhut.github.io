@@ -26,7 +26,7 @@
             <h1>Todo list</h1>
         </header>
 
-        <main class="row task-list-wrapper">
+        <main id="taskListWrapper" class="row task-list-wrapper">
             <ul class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6 task-list">
                 <div class="task-list-placeholder-empty">
                     <img src="./images/emptycolor.png" alt="Ikona listy zadań">
@@ -38,7 +38,7 @@
                     <h2>Wszystko zrobione!</h2>
                     <h6>Odpocznij trochę.</h6>
                 </div>
-                <!-- <li class="task">
+                <li class="task">
                     <div class="task-info-wrapper">
                             <div class="task-info-tittle-wrapper">
                                 <span class="deadline-badge">31.07.2022 16:00</span>
@@ -84,6 +84,21 @@
                                 <span class="deadline-badge">31.07.2022 16:00</span>
                                 <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
                             </div>
+                            <p class="task-info-desc">C8QFtFWIaj 71KuRly PhuhQQ3iEG TGKnr5z58 5dLxrUu6huf pK 8C8QFtFW Iaj 1KuRly Ph uhQ Q3iEGTG  Knr5z5 85dL xr Uu6hu fpK8C8Q FtFWIaj 71KuRlyP hu</p>
+                    </div>  
+                    <div class="task-done-btn-wrapper">
+                        <button class="task-done-btn"><span class="material-symbols-outlined">
+                            check_circle
+                            </span></button>
+                    </div>
+                </li>
+                <li class="task">
+                    <div class="task-info-wrapper">
+                            <div class="task-info-tittle-wrapper">
+                                <span class="deadline-badge">31.07.2022 16:00</span>
+                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
+                            </div>
+
                     </div> 
                     <div class="task-done-btn-wrapper">
                         <button class="task-done-btn"><span class="material-symbols-outlined">
@@ -182,31 +197,23 @@
                             </span></button>
                     </div>
                 </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li> -->
             </ul>
-            <button class="add-new-task-btn"><span class="material-symbols-outlined">
+            <button id="addNewTaskButton" class="add-new-task-btn"><span class="material-symbols-outlined">
                 add
                 </span>
             </button>
             <div class="w-100"></div>
         </main>
-        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6 add-new-item-popup">
-            <form class="">
-                <input type="text" placeholder="Tytuł zadania">
-                <input type="textarea" placeholder="Opis zadania">
-                <input type="datetime-local" placeholder="Termin">
+        <div id="newTaskPopup" class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6 add-new-task-popup">
+            <form id="newTaskPopupForm">
+                <input class="form-control" type="text" placeholder="Tytuł zadania">
+                <small class="inputErrorInfo"></small>
+                <textarea class="form-control" placeholder="Opis zadania" maxlength="150"></textarea>
+                <small class="inputErrorInfo"></small>
+                <div class="d-flex justify-content-around">
+                    <input class="form-control me-2" type="date">
+                    <input class="form-control ms-2" type="time" >
+                </div>
                 <button type="submit">Dodaj do listy</button>
             </form>
         </div>
@@ -214,6 +221,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
