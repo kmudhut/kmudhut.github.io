@@ -5,6 +5,7 @@ let newTaskPopup;
 let taskListWrapper;
 let taskList;
 let newTaskPopupForm;
+let hideNewTaskPopupBtn;
 let inputErrorsInfo;
 let tasksTab = [];
 let taskListPlaceholderEmpty, taskListPlaceholderDone;
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     newTaskPopup = document.getElementById('newTaskPopup');
     taskListWrapper = document.getElementById('taskListWrapper');
     newTaskPopupForm = document.getElementById('newTaskPopupForm');
+    hideNewTaskPopupBtn = document.getElementById('hideNewTaskPopupBtn');
     inputErrorsInfo = document.getElementsByClassName('inputErrorInfo');
     taskList = document.getElementById('taskList');
     taskListPlaceholderEmpty = document.getElementById('taskListPlaceholderEmpty');
@@ -36,13 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addNewTaskButton.addEventListener('click', toggleNewTaskPopup);
     newTaskPopupForm.addEventListener('submit', addNewTask);
+    newTaskPopupForm.elements[0].addEventListener('click', toggleNewTaskPopup);
 
 });
 
 const toggleNewTaskPopup = () => {
         
     if (addNewTaskButton.style.opacity !== '0') {
-        setTimeout(()=>{ //newTaskPopupForm.elements[0].focus();
+        setTimeout(()=>{ //newTaskPopupForm.elements[1].focus();
             [...newTaskPopupForm.elements].forEach((elem)=>
             {
                 elem.tabIndex = "0";
@@ -60,10 +63,11 @@ const toggleNewTaskPopup = () => {
             elem.tabIndex = "-1";
             elem.blur();
         })
-        newTaskPopup.style.transform = 'translateY(350px)';
+        newTaskPopup.style.transform = 'translateY(400px)';
         taskListWrapper.style.height = '90%';
         addNewTaskButton.style.opacity = '1';
         addNewTaskButton.disabled = false;
+        setTimeout(resetForm, 400);
     }
 }
 
@@ -166,15 +170,15 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
 const addNewTask = (event) => {
     event.preventDefault();
 
-    if (event.target.elements[0].value.trim().length > 2) 
+    if (event.target.elements[1].value.trim().length > 2) 
     {
 
         toggleNewTaskPopup();
         let task = {
-            "title": event.target.elements[0].value,
-            "description": event.target.elements[1].value,
-            "deadlineDate": event.target.elements[2].value,
-            "deadlineTime": event.target.elements[3].value,
+            "title": event.target.elements[1].value,
+            "description": event.target.elements[2].value,
+            "deadlineDate": event.target.elements[3].value,
+            "deadlineTime": event.target.elements[4].value,
             "done": false
         };
         tasksTab.push(task);
@@ -187,7 +191,7 @@ const addNewTask = (event) => {
     }
     else{
         inputErrorsInfo[0].innerText = 'Tytuł powinien zawierać min. 3 znaki.';
-        event.target.elements[0].classList.add('is-invalid');
+        event.target.elements[1].classList.add('is-invalid');
     }
 }
 

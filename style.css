@@ -228,6 +228,26 @@ background-color: #eee;
 {
   background-color: rgb(90, 139, 227);
 }
+.hideNewTaskPopupBtn
+{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:48px;
+  height:24px;
+  outline:none;
+  border:none;
+  padding:0;
+  background-color: cornflowerblue;
+  margin:-40px auto 8px auto;
+  border-radius:100px;
+  color:white;
+}
+.hideNewTaskPopupBtn span{
+
+  display: inline-flex;
+  align-items: center;
+}
 .add-new-task-popup {
   display: flex;
   transition: transform 0.4s;
@@ -238,7 +258,7 @@ background-color: #eee;
   padding: 10px 10% 35px 10%;
   justify-content: center;
   align-items: center;
-  overflow: auto;
+  /* overflow: auto; */
   border-radius:10px 10px 0 0;
   border-top:1px solid #ddd;
   box-shadow: 0px -4px 7px -8px rgba(0, 0, 0, 0.67);
@@ -281,7 +301,7 @@ background-color: #eee;
   box-shadow: 0px 0px 9px -4px rgba(0, 0, 0, 0.67) !important;
 }
 
-.add-new-task-popup button {
+.add-new-task-popup button[type=submit] {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -297,13 +317,13 @@ background-color: #eee;
   box-shadow: 0px 0px 12px -4px rgba(0, 0, 0, 0.67);
 }
 
-.add-new-task-popup button:hover
+.add-new-task-popup button[type=submit]:hover
 {
   box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.67) !important;
   background-color: rgb(95, 144, 232);
 }
 
-.add-new-task-popup button:active
+.add-new-task-popup button[type=submit]:active
 {
   box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.67) !important;
   background-color: rgb(90, 139, 227);
