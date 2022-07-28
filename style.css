@@ -5,10 +5,22 @@
 body {
   overflow: hidden;
   font-family: "Roboto Condensed", sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
-h1{
+header{
+  background-color: #ddd;
+  
+  padding: 0!important;
+}
+h3{
   padding-right:10px;
+}
+
+.beta-badge
+{
+  font-size:11px;
+  vertical-align: middle;
 }
 .main-wrapper {
   height: 100vh;
@@ -20,9 +32,9 @@ h1{
   justify-content: center;
   align-items: center;
   height: 10%;
-  max-height: 10%;
+  max-height: 7%;
 }
-.header-wrapper h1 {
+.header-wrapper h3 {
   text-align: center;
   margin: 0;
 }
@@ -122,6 +134,7 @@ h1{
 .task-info-desc {
   margin: 0.25em 0 0 0;
   font-size: 14px;
+  text-overflow: ellipsis;
 }
 
 .deadline-badge {
@@ -154,6 +167,8 @@ h1{
   align-items: center;
   width: 10%;
 }
+
+
 
 .task-done-btn {
   display: flex;
@@ -191,7 +206,10 @@ background-color: #eee;
   margin: 0 auto 0 auto;
   padding: 0px;
   border-radius: 100%;
-  background-color: #ccc;
+  background-color: cornflowerblue;
+  color:white;
+  box-shadow: 0px 0px 12px -4px rgba(0, 0, 0, 0.67);
+  
   border: none;
   opacity: 1;
   transition: opacity 0.4s;
@@ -200,7 +218,16 @@ background-color: #eee;
   font-size: 40px;
   font-weight: 400;
 }
+.add-new-task-btn:hover
+{
+  box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.67) !important;
+  background-color: rgb(95, 144, 232);
+}
 
+.add-new-task-btn:active
+{
+  background-color: rgb(90, 139, 227);
+}
 .add-new-task-popup {
   display: flex;
   transition: transform 0.4s;
@@ -212,6 +239,9 @@ background-color: #eee;
   justify-content: center;
   align-items: center;
   overflow: auto;
+  border-radius:10px 10px 0 0;
+  border-top:1px solid #ddd;
+  box-shadow: 0px -4px 7px -8px rgba(0, 0, 0, 0.67);
 }
 
 .add-new-task-popup form {
@@ -256,12 +286,30 @@ background-color: #eee;
   justify-content: center;
   align-items: center;
   height: 45px;
-  width: 37%;
+  width: 50%;
   border-radius: 10px;
   border: 1px solid gray;
   padding: 5px 10px 5px 10px;
   margin: 16px auto 1px auto;
+  background-color: rgb(100, 149, 237);
+  color:white;
+  border: none;
+  box-shadow: 0px 0px 12px -4px rgba(0, 0, 0, 0.67);
 }
+
+.add-new-task-popup button:hover
+{
+  box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.67) !important;
+  background-color: rgb(95, 144, 232);
+}
+
+.add-new-task-popup button:active
+{
+  box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.67) !important;
+  background-color: rgb(90, 139, 227);
+}
+
+
 
 .inputErrorInfo {
   display: flex;

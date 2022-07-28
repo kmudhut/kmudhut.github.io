@@ -16,15 +16,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
-    <title>Lista zadań v1.0</title>
+    <title>Lista zadań v1.1</title>
 </head>
 
 <body>
     <div class="container main-wrapper">
-        <header class="header-wrapper">
-            <h1>Lista zadań v1.0</h1>
-            <span class="badge rounded-pill text-bg-danger">BETA</span>
+        <header class="header-wrapper row">
+            <h3>Lista zadań v1.1 <span class="badge rounded-pill text-bg-danger beta-badge">BETA</span></h3>
         </header>
 
         <main id="taskListWrapper" class="row task-list-wrapper">
@@ -46,18 +46,20 @@
             </button>
             <div class="w-100"></div>
         </main>
-        <div id="newTaskPopup" class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6 add-new-task-popup">
-            <form id="newTaskPopupForm">
-                <input class="form-control" type="text" placeholder="Tytuł zadania" tabindex="-1">
-                <small class="inputErrorInfo"></small>
-                <textarea class="form-control" placeholder="Opis zadania" maxlength="150" tabindex="-1"></textarea>
-                <small class="inputErrorInfo"></small>
-                <div class="d-flex justify-content-around">
-                    <input class="form-control me-2" type="date" tabindex="-1">
-                    <input class="form-control ms-2" type="time" tabindex="-1">
-                </div>
-                <button type="submit" tabindex="-1">Dodaj do listy</button>
-            </form>
+        <div class="row">
+            <div id="newTaskPopup" class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6 add-new-task-popup">
+                <form id="newTaskPopupForm">
+                    <input class="form-control" type="text" placeholder="Tytuł zadania" tabindex="-1">
+                    <small class="inputErrorInfo"></small>
+                    <textarea class="form-control" placeholder="Opis zadania" maxlength="150" tabindex="-1"></textarea>
+                    <small class="inputErrorInfo"></small>
+                    <div class="d-flex justify-content-around">
+                        <input class="form-control me-2" type="date" tabindex="-1" placeholder="Data">
+                        <input class="form-control ms-2" type="time" tabindex="-1" placeholder="Czas">
+                    </div>
+                    <button type="submit" tabindex="-1"><span class="material-symbols-outlined align-bottom">add</span>Dodaj do listy</button>
+                </form>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

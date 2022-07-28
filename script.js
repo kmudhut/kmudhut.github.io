@@ -20,11 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
     taskListPlaceholderEmpty = document.getElementById('taskListPlaceholderEmpty');
     taskListPlaceholderDone = document.getElementById('taskListPlaceholderDone');
 
-    if(JSON.parse(localStorage.getItem('todoList')).length > 0)
+    if(localStorage.getItem('todoList'))
     {
-        tasksTab = JSON.parse(localStorage.getItem('todoList'));
-        taskListPlaceholderEmpty.style.display = 'none';
-        generateTaskListDOM(tasksTab);
+        if(JSON.parse(localStorage.getItem('todoList')).length > 0)
+        {
+            tasksTab = JSON.parse(localStorage.getItem('todoList'));
+            taskListPlaceholderEmpty.style.display = 'none';
+            generateTaskListDOM(tasksTab);
+        }
     }
     else{
         tasksTab = [];
@@ -39,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const toggleNewTaskPopup = () => {
         
     if (addNewTaskButton.style.opacity !== '0') {
-        setTimeout(()=>{ newTaskPopupForm.elements[0].focus();
+        setTimeout(()=>{ //newTaskPopupForm.elements[0].focus();
             [...newTaskPopupForm.elements].forEach((elem)=>
             {
                 elem.tabIndex = "0";
@@ -137,6 +140,7 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
             rmvbutton.classList.add('task-done-btn');
             rmvspan.classList.add('material-symbols-outlined');
             rmvspan.innerText = 'delete';
+            rmvspan.style.color = '#dc3545';
             rmvbutton.addEventListener('click', removeTask);
             rmvbutton.appendChild(rmvspan);
             wrapperDivRight.appendChild(rmvbutton);
@@ -150,11 +154,8 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
             wrapperDivLeft.appendChild(p);
         }
 
-        
         button.appendChild(doneIconSpan);
-        
-
-        
+  
         wrapperDivRight.appendChild(button);
         li.append(wrapperDivLeft, wrapperDivRight);
         taskList.appendChild(li);
