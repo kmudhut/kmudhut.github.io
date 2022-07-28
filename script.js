@@ -51,7 +51,7 @@ const toggleNewTaskPopup = () => {
                 elem.tabIndex = "0";
             })
         
-        }, 400);
+        }, 500);
         newTaskPopup.style.transform = 'translateY(0px)';
         taskListWrapper.style.height = 'calc(90% - 350px)';
         addNewTaskButton.style.opacity = '0';
@@ -67,7 +67,7 @@ const toggleNewTaskPopup = () => {
         taskListWrapper.style.height = '90%';
         addNewTaskButton.style.opacity = '1';
         addNewTaskButton.disabled = false;
-        setTimeout(resetForm, 400);
+        setTimeout(resetForm, 500);
     }
 }
 
@@ -184,7 +184,7 @@ const addNewTask = (event) => {
         tasksTab.push(task);
 
         generateTaskListDOM(tasksTab);
-        setTimeout(resetForm, 400);
+        setTimeout(resetForm, 500);
         
 
 
