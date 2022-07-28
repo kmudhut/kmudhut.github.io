@@ -7,6 +7,9 @@ body {
   font-family: "Roboto Condensed", sans-serif;
 }
 
+h1{
+  padding-right:10px;
+}
 .main-wrapper {
   height: 100vh;
   background-color: #eee;
@@ -63,11 +66,12 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  transition:0.4s;
 }
 .task-list-placeholder-done img {
   width: 30%;
   height: auto;
-  max-width: 512x;
+  max-width: 512px;
   max-height: 512px;
 }
 .task-list-placeholder-done h2 {
@@ -83,10 +87,19 @@ body {
   padding: 20px 10px 20px 10px;
   margin-bottom: 5px;
   box-shadow: 0px 0px 7px -4px rgba(0, 0, 0, 0.67);
+  opacity:1;
+  transition: 0.4s;
 }
 
 .task-info-wrapper {
-  width: 90%;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*border: 1px solid black;*/
+}
+.done-task-info-wrapper {
+  width: 75%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -125,12 +138,16 @@ body {
   display: inline-flex;
   align-items: center;
   text-align: center;
+  white-space: nowrap;
 }
 
 .deadline-badge-expired {
   background-color: #dc3545;
 }
 
+.deadline-badge-done {
+  background-color: gray;
+}
 .task-done-btn-wrapper {
   display: flex;
   justify-content: right;
@@ -151,6 +168,15 @@ body {
   font-weight: 300;
   border-radius: 100%;
 }
+
+.task-done-btn:hover .material-symbols-outlined {
+background-color: #eee;
+}
+
+.task-done-btn:focus .material-symbols-outlined {
+  background-color: #ddd;
+  }
+  
 
 .add-new-task-btn {
   display: flex;

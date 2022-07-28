@@ -17,186 +17,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
-    <title>Todo list v0.1</title>
+    <title>Lista zadań v1.0</title>
 </head>
 
 <body>
     <div class="container main-wrapper">
         <header class="header-wrapper">
-            <h1>Todo list</h1>
+            <h1>Lista zadań v1.0</h1>
+            <span class="badge rounded-pill text-bg-danger">BETA</span>
         </header>
 
         <main id="taskListWrapper" class="row task-list-wrapper">
             <ul id="taskList" class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6 task-list">
-                <div class="task-list-placeholder-empty">
+                <div id="taskListPlaceholderEmpty" class="task-list-placeholder-empty">
                     <img src="./images/emptycolor.png" alt="Ikona listy zadań">
                     <h2>Pusto.</h2>
                     <h6>Nie dodałeś jeszcze żadnego zadania.</h6>
                 </div>
-                <div class="task-list-placeholder-done">
+                <div id="taskListPlaceholderDone" class="task-list-placeholder-done">
                     <img src="./images/sunbathing.png" alt="Ikona listy zadań">
                     <h2>Wszystko zrobione!</h2>
                     <h6>Odpocznij trochę.</h6>
                 </div>
-                <!-- <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                            <p class="task-info-desc">dsadadadd das d  </p>
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                            <p class="task-info-desc">C8QFtFWIaj 71KuRly PhuhQQ3iEG TGKnr5z58 5dLxrUu6huf pK 8C8QFtFW Iaj 1KuRly Ph uhQ Q3iEGTG  Knr5z5 85dL xr Uu6hu fpK8C8Q FtFWIaj 71KuRlyP hu</p>
-                    </div>  
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li>
-                <li class="task">
-                    <div class="task-info-wrapper">
-                            <div class="task-info-tittle-wrapper">
-                                <span class="deadline-badge">31.07.2022 16:00</span>
-                                <h6 class="task-info-tittle">Oglądnąć pierwszy odcinek kursu JSa </h6>
-                            </div>
-                    </div> 
-                    <div class="task-done-btn-wrapper">
-                        <button class="task-done-btn"><span class="material-symbols-outlined">
-                            check_circle
-                            </span></button>
-                    </div>
-                </li> -->
             </ul>
             <button id="addNewTaskButton" class="add-new-task-btn"><span class="material-symbols-outlined">
                 add
@@ -206,15 +48,15 @@
         </main>
         <div id="newTaskPopup" class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6 add-new-task-popup">
             <form id="newTaskPopupForm">
-                <input class="form-control" type="text" placeholder="Tytuł zadania">
+                <input class="form-control" type="text" placeholder="Tytuł zadania" tabindex="-1">
                 <small class="inputErrorInfo"></small>
-                <textarea class="form-control" placeholder="Opis zadania" maxlength="150"></textarea>
+                <textarea class="form-control" placeholder="Opis zadania" maxlength="150" tabindex="-1"></textarea>
                 <small class="inputErrorInfo"></small>
                 <div class="d-flex justify-content-around">
-                    <input class="form-control me-2" type="date">
-                    <input class="form-control ms-2" type="time" >
+                    <input class="form-control me-2" type="date" tabindex="-1">
+                    <input class="form-control ms-2" type="time" tabindex="-1">
                 </div>
-                <button type="submit">Dodaj do listy</button>
+                <button type="submit" tabindex="-1">Dodaj do listy</button>
             </form>
         </div>
     </div>
