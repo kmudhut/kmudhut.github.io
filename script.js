@@ -12,6 +12,10 @@ let taskListPlaceholderEmpty, taskListPlaceholderDone;
 
 document.addEventListener('DOMContentLoaded', () => {
 
+
+    document.getElementsByClassName('main-wrapper')[0].style.height = `${window.innerHeight}px`;
+    window.addEventListener('resize', ()=>{document.getElementsByClassName('main-wrapper')[0].style.height = `${window.innerHeight}px`;})
+    window.addEventListener('orientationchange', ()=>{document.getElementsByClassName('main-wrapper')[0].style.height = `${window.innerHeight}px`;})
     addNewTaskButton = document.getElementById('addNewTaskButton');
     newTaskPopup = document.getElementById('newTaskPopup');
     taskListWrapper = document.getElementById('taskListWrapper');
@@ -53,9 +57,11 @@ const toggleNewTaskPopup = () => {
         
         }, 500);
         newTaskPopup.style.transform = 'translateY(0px)';
-        taskListWrapper.style.height = 'calc(90% - 350px)';
+        hideNewTaskPopupBtn.style.opacity = '1';
+        taskListWrapper.style.height = 'calc(93% - 350px)';
         addNewTaskButton.style.opacity = '0';
-        addNewTaskButton.disabled = true;
+        setTimeout(()=>{addNewTaskButton.style.transform = 'translateX(9999px)';}, 400)
+        
     }
     else {
         [...newTaskPopupForm.elements].forEach((elem)=>
@@ -64,9 +70,10 @@ const toggleNewTaskPopup = () => {
             elem.blur();
         })
         newTaskPopup.style.transform = 'translateY(400px)';
-        taskListWrapper.style.height = '90%';
+        hideNewTaskPopupBtn.style.opacity = '0';
+        taskListWrapper.style.height = '93%';
         addNewTaskButton.style.opacity = '1';
-        addNewTaskButton.disabled = false;
+        addNewTaskButton.style.transform = 'translateX(0px)';
         setTimeout(resetForm, 500);
     }
 }
@@ -108,8 +115,19 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
         div.classList.add('task-info-tittle-wrapper');
         h6.classList.add('task-info-tittle');
         button.classList.add('task-done-btn');
-        button.addEventListener('click', toggleTaskIsDone);
-        doneIconSpan.classList.add('material-symbols-outlined');
+        button.innerHTML = `
+            <svg viewBox="-5 -5 66.7 67">
+            <path class="retract" fill="none" stroke="cornflowerblue" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+            M36,6.3c5.7,2.1,10.2,6.2,12.9,11.1"/>
+            <path fill="none" stroke="cornflowerblue" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="
+            M48.9,17.4c3.1,5.8,3.9,12.9,1.4,19.7c-4.6,12.4-18.4,18.8-30.8,14.3S0.7,33,5.2,20.5S23.6,1.7,36,6.3"/>
+            
+            <polyline class="tick" fill="none" stroke="cornflowerblue" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="
+            20.3,25.4 28.6,33.9 46.7,8.3 "/>
+            </svg>
+        `;
+        button.addEventListener('click', toggleTaskIsDone, true);
+        //doneIconSpan.classList.add('material-symbols-outlined');
 
         if(task.deadlineDate || task.deadlineTime)
         {
@@ -129,7 +147,8 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
         }
         h6.innerText = task.title;
         div.appendChild(h6);
-        doneIconSpan.innerText = 'circle';
+        //doneIconSpan.innerText = 'circle';
+        
         if(task.done) 
         {
             div.style.textDecoration = 'line-through';
@@ -138,7 +157,8 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
             div.style.color = 'gray';
             p.style.color = 'gray';
 
-            doneIconSpan.innerText = 'task_alt';
+            //doneIconSpan.innerText = 'task_alt';
+            button.classList.add('open');
             let rmvbutton = document.createElement('button');
             let rmvspan = document.createElement('span');
             rmvbutton.classList.add('task-done-btn');
@@ -158,7 +178,7 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
             wrapperDivLeft.appendChild(p);
         }
 
-        button.appendChild(doneIconSpan);
+        //button.appendChild(doneIconSpan);
   
         wrapperDivRight.appendChild(button);
         li.append(wrapperDivLeft, wrapperDivRight);
@@ -197,7 +217,7 @@ const addNewTask = (event) => {
 
 const toggleTaskIsDone = (event) =>
 {
-   let index = event.target.parentElement.parentElement.parentElement.dataset.taskId;
+   let index = event.currentTarget.parentElement.parentElement.dataset.taskId;
    if(tasksTab[index].done == false)
    {
     tasksTab[index].done = true;
@@ -210,6 +230,7 @@ const toggleTaskIsDone = (event) =>
 
 const removeTask = (event) =>
 {
+    
     let index = event.target.parentElement.parentElement.parentElement.dataset.taskId;
     event.target.parentElement.parentElement.parentElement.addEventListener('transitionend', ()=>
     {

@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 
+html, body { height: 100% } 
 body {
   overflow: hidden;
   font-family: "Roboto Condensed", sans-serif;
@@ -23,7 +24,10 @@ h3{
   vertical-align: middle;
 }
 .main-wrapper {
-  height: 100vh;
+  height: 100vh;            /* fall-back */
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: fill-available;
   background-color: #eee;
 }
 
@@ -42,9 +46,9 @@ h3{
 .task-list-wrapper {
   display: flex;
   justify-content: center;
-  height: 90%;
-  max-height: 90%;
-  transition: height 0.4s;
+  height: 93%;
+  max-height: 93%;
+  transition: height 0.5s;
 }
 
 .task-list {
@@ -165,7 +169,7 @@ h3{
   display: flex;
   justify-content: right;
   align-items: center;
-  width: 10%;
+  /*width: 10%;*/
 }
 
 
@@ -175,13 +179,39 @@ h3{
   justify-content: center;
   align-items: center;
   padding: 0px;
+  width:36px;
   background-color: rgba(0, 0, 0, 0);
   border: none;
+
 }
+
+@keyframes fadeIn {
+  from{
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}
+
+@keyframes fadeOut {
+  from{
+    opacity:1;
+  }
+  to {
+    opacity:0;
+  }
+}
+
 .task-done-btn .material-symbols-outlined {
   font-size: 36px;
   font-weight: 300;
   border-radius: 100%;
+  animation: fadeIn 0.2s ease-in;
+}
+
+.task-done-btn .material-symbols-outlined .removing{
+  animation: fadeOut 0.2s ease-in;
 }
 
 .task-done-btn:hover .material-symbols-outlined {
@@ -230,7 +260,9 @@ background-color: #eee;
 }
 .hideNewTaskPopupBtn
 {
-  display:flex;
+  display:block;
+  opacity:0;
+  transition: opacity 0.5s;
   align-items: center;
   justify-content: center;
   width:48px;
@@ -262,13 +294,17 @@ background-color: #eee;
   display: inline-flex;
   align-items: center;
 }
-.add-new-task-popup {
-  display: flex;
-  transition: transform 0.5s;
-  transform: translateY(350px);
-  margin: 0 auto 0 auto;
+
+.newTaskPopupWrapper
+{
   height: 350px;
   max-height: 350px;
+}
+.add-new-task-popup {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  transform: translateY(400px); 
+  margin: 0 auto 0 auto;
   padding: 10px 10% 35px 10%;
   justify-content: center;
   align-items: center;
@@ -353,7 +389,111 @@ background-color: #eee;
   color: #dc3545;
 }
 
+.credits
+{
+  position:fixed;
+  bottom:0;
+  font-size:11px;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  width:100%;
+}
 footer {
-  height: 5%;
-  max-height: 5%;
-}/*# sourceMappingURL=style.css.map */
+
+}
+
+svg {
+  display: block;
+  margin: 0 auto;
+  border-radius:100%;
+}
+
+.tick {
+  stroke-dasharray: 44;
+  stroke-dashoffset: 44;
+}
+.open
+{
+  width:36px;
+}
+.open .retract {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation: retract 0.5s ease-in-out forwards;
+}
+
+.open .tick {
+  animation: dash 0.5s ease-in-out forwards;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 44;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes retract {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 20;
+  }
+}
+
+
+/*# sourceMappingURL=style.css.map */
+
+
+svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.task-done-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  width:36px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  cursor: pointer;
+}
+
+.tick {
+  stroke-dasharray: 44;
+  stroke-dashoffset: 44;
+}
+
+.open .retract {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation: retract 0.5s ease-in-out forwards;
+}
+
+.open .tick {
+  animation: dash 0.5s ease-in-out forwards;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 44;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes retract {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 20;
+  }
+}
