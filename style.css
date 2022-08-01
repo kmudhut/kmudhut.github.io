@@ -207,11 +207,13 @@ h3{
   font-size: 36px;
   font-weight: 300;
   border-radius: 100%;
-  animation: fadeIn 0.2s ease-in;
 }
 
-.task-done-btn .material-symbols-outlined .removing{
-  animation: fadeOut 0.2s ease-in;
+.task-done-btn .material-symbols-outlined-fade-in {
+  font-size: 36px;
+  font-weight: 300;
+  border-radius: 100%;
+  animation: fadeIn 0.2s ease-in;
 }
 
 .task-done-btn:hover .material-symbols-outlined {
@@ -478,6 +480,15 @@ svg {
 
 .open .tick {
   animation: dash 0.5s ease-in-out forwards;
+}
+
+.show .retract {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+}
+
+.show .tick {
+  stroke-dashoffset: 0;
 }
 
 @keyframes dash {

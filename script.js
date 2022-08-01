@@ -151,6 +151,7 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
         
         if(task.done) 
         {
+
             div.style.textDecoration = 'line-through';
             p.style.textDecoration = 'line-through';
             if(task.deadlineDate || task.deadlineTime) badgeSpan.classList.add('deadline-badge-done');
@@ -158,11 +159,26 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
             p.style.color = 'gray';
 
             //doneIconSpan.innerText = 'task_alt';
-            button.classList.add('open');
+            
+            if(task.animate === true)
+            {
+                button.classList.add('open');
+            }
+            else{
+                button.classList.add('show');
+            }
+            
             let rmvbutton = document.createElement('button');
             let rmvspan = document.createElement('span');
             rmvbutton.classList.add('task-done-btn');
+            if(task.animate === true)
+            {
+                rmvspan.classList.add('material-symbols-outlined-fade-in');
+
+            }
+
             rmvspan.classList.add('material-symbols-outlined');
+
             rmvspan.innerText = 'delete';
             rmvspan.style.color = '#dc3545';
             rmvbutton.addEventListener('click', removeTask);
@@ -199,7 +215,8 @@ const addNewTask = (event) => {
             "description": event.target.elements[2].value,
             "deadlineDate": event.target.elements[3].value,
             "deadlineTime": event.target.elements[4].value,
-            "done": false
+            "done": false,
+            "animate": true
         };
         tasksTab.push(task);
 
@@ -221,11 +238,17 @@ const toggleTaskIsDone = (event) =>
    if(tasksTab[index].done == false)
    {
     tasksTab[index].done = true;
+    generateTaskListDOM(tasksTab);
+    tasksTab[index].animate = false;
+    console.log(tasksTab[index].animate);
    }
    else{
     tasksTab[index].done = false;
+    generateTaskListDOM(tasksTab);
+    tasksTab[index].animate = true;
+    console.log(tasksTab[index].animate);
    }
-   generateTaskListDOM(tasksTab);
+   //generateTaskListDOM(tasksTab);
 }
 
 const removeTask = (event) =>
