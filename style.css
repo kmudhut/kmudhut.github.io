@@ -1,20 +1,55 @@
+@keyframes fadeIn {
+  from{
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}
+
+@keyframes fadeOut {
+  from{
+    opacity:1;
+  }
+  to {
+    opacity:0;
+  }
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 44;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes retract {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 20;
+  }
+}
+
+.fadeIn
+{
+  animation: fadeIn 0.4s forwards;
+}
+.fadeOut{
+  animation: fadeOut 0.4s forwards;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   overflow: hidden;
-  font-family: "Roboto Condensed", sans-serif;
   font-family: 'Nunito', sans-serif;
-}
-
-header{
-  background-color: #ddd;
-  
-  padding: 0!important;
-}
-h3{
-  padding-right:10px;
+  background-color: #eee;
 }
 
 .beta-badge
@@ -31,10 +66,13 @@ h3{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 10%;
+  background-color: #eee;
+  padding: 0!important;
+  height: 7%;
   max-height: 7%;
 }
 .header-wrapper h3 {
+  padding-right:10px;
   text-align: center;
   margin: 0;
 }
@@ -42,9 +80,9 @@ h3{
 .task-list-wrapper {
   display: flex;
   justify-content: center;
-  height: 90%;
-  max-height: 90%;
-  transition: height 0.4s;
+  height: 93%;
+  max-height: 93%;
+  transition: height 0.5s;
 }
 
 .task-list {
@@ -78,7 +116,7 @@ h3{
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  transition:0.4s;
+  animation: fadeIn 0.4s forwards;
 }
 .task-list-placeholder-done img {
   width: 30%;
@@ -100,7 +138,7 @@ h3{
   margin-bottom: 5px;
   box-shadow: 0px 0px 7px -4px rgba(0, 0, 0, 0.67);
   opacity:1;
-  transition: 0.4s;
+
 }
 
 .task-info-wrapper {
@@ -108,22 +146,20 @@ h3{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /*border: 1px solid black;*/
 }
 .done-task-info-wrapper {
   width: 75%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /*border: 1px solid black;*/
 }
 
-.task-info-tittle-wrapper {
+.task-info-title-wrapper {
   display: flex;
   align-items: center;
 }
 
-.task-info-tittle {
+.task-info-title {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -134,6 +170,7 @@ h3{
 .task-info-desc {
   margin: 0.25em 0 0 0;
   font-size: 14px;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -145,7 +182,8 @@ h3{
   font-size: 11px;
   padding: 4px 6px 4px 6px;
   margin: 0 5px 0 0px;
-  background-color: cornflowerblue;
+  /* background-color: cornflowerblue; */
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border-radius: 50rem;
   display: inline-flex;
@@ -159,46 +197,54 @@ h3{
 }
 
 .deadline-badge-done {
+  background-image: none;
   background-color: gray;
+  
 }
+
 .task-done-btn-wrapper {
   display: flex;
   justify-content: right;
   align-items: center;
-  width: 10%;
 }
-
-
 
 .task-done-btn {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0px;
+  width:36px;
   background-color: rgba(0, 0, 0, 0);
   border: none;
 }
+
 .task-done-btn .material-symbols-outlined {
   font-size: 36px;
   font-weight: 300;
   border-radius: 100%;
 }
 
-.task-done-btn:hover .material-symbols-outlined {
+.task-done-btn .material-symbols-outlined-fade-in {
+  font-size: 36px;
+  font-weight: 300;
+  border-radius: 100%;
+  animation: fadeIn 0.2s ease-in;
+}
+
+.task-done-btn:hover .material-symbols-outlined, .task-done-btn:hover svg {
 background-color: #eee;
 }
 
-.task-done-btn:focus .material-symbols-outlined {
+.task-done-btn:focus .material-symbols-outlined, .task-done-btn:focus svg {
   background-color: #ddd;
-  }
-  
+}
 
 .add-new-task-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   position: fixed;
   left: 0;
   right: 0;
@@ -206,10 +252,10 @@ background-color: #eee;
   margin: 0 auto 0 auto;
   padding: 0px;
   border-radius: 100%;
-  background-color: cornflowerblue;
+  /* background-color: cornflowerblue; */
+  background-image: linear-gradient(135deg, rgb(102, 126, 234) 0%, rgb(118, 75, 162) 100%);
   color:white;
   box-shadow: 0px 0px 12px -4px rgba(0, 0, 0, 0.67);
-  
   border: none;
   opacity: 1;
   transition: opacity 0.4s;
@@ -221,16 +267,19 @@ background-color: #eee;
 .add-new-task-btn:hover
 {
   box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.67) !important;
-  background-color: rgb(95, 144, 232);
+  background-image: linear-gradient(135deg, rgb(92, 116, 224) 0%, rgb(108, 65, 152) 100%);
 }
 
 .add-new-task-btn:active
 {
-  background-color: rgb(90, 139, 227);
+  background-image: linear-gradient(135deg, rgb(82, 106, 214) 0%, rgb(98, 55, 142) 100%);
 }
-.hideNewTaskPopupBtn
+
+.hide-add-new-task-popup-btn
 {
   display:flex;
+  opacity:0;
+  transition: opacity 0.5s;
   align-items: center;
   justify-content: center;
   width:48px;
@@ -238,37 +287,42 @@ background-color: #eee;
   outline:none;
   border:none;
   padding:0;
-  background-color: cornflowerblue;
+  /* background-color: cornflowerblue; */
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   margin:-40px auto 8px auto;
   border-radius:100px;
   color:white;
   box-shadow: 0px 0px 8px -4px rgba(0, 0, 0, 0.67);
 }
 
-.hideNewTaskPopupBtn:hover
+.hide-add-new-task-popup-btn:hover
 {
-  background-color: rgb(95, 144, 232);
+  /* background-color: rgb(95, 144, 232); */
+  background-image: linear-gradient(135deg, rgb(92, 116, 224) 0%, rgb(108, 65, 152) 100%);
 }
 
-.hideNewTaskPopupBtn:active
+.hide-add-new-task-popup-btn:active
 {
   box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.67) !important;
-  background-color: rgb(90, 139, 227);
+  background-image: linear-gradient(135deg, rgb(82, 106, 214) 0%, rgb(98, 55, 142) 100%);
 }
 
-
-.hideNewTaskPopupBtn span{
+.hide-add-new-task-popup-btn span{
 
   display: inline-flex;
   align-items: center;
 }
-.add-new-task-popup {
-  display: flex;
-  transition: transform 0.5s;
-  transform: translateY(350px);
-  margin: 0 auto 0 auto;
+
+.add-new-task-popup-wrapper
+{
   height: 350px;
   max-height: 350px;
+}
+.add-new-task-popup {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  transform: translateY(400px); 
+  margin: 0 auto 0 auto;
   padding: 10px 10% 35px 10%;
   justify-content: center;
   align-items: center;
@@ -295,6 +349,7 @@ background-color: #eee;
 
 .add-new-task-popup input:focus {
   box-shadow: 0px 0px 9px -4px rgba(0, 0, 0, 0.67);
+  border-color:rgb(122, 146, 254);
 }
 
 .add-new-task-popup textarea {
@@ -309,6 +364,7 @@ background-color: #eee;
 
 .add-new-task-popup textarea:focus {
   box-shadow: 0px 0px 9px -4px rgba(0, 0, 0, 0.67);
+  border-color:rgb(122, 146, 254);
 }
 
 .is-invalid:focus {
@@ -325,7 +381,7 @@ background-color: #eee;
   border: 1px solid gray;
   padding: 5px 10px 5px 10px;
   margin: 16px auto 1px auto;
-  background-color: rgb(100, 149, 237);
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color:white;
   border: none;
   box-shadow: 0px 0px 12px -4px rgba(0, 0, 0, 0.67);
@@ -334,18 +390,16 @@ background-color: #eee;
 .add-new-task-popup button[type=submit]:hover
 {
   box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.67) !important;
-  background-color: rgb(95, 144, 232);
+  background-image: linear-gradient(135deg, rgb(92, 116, 224) 0%, rgb(108, 65, 152) 100%);
 }
 
 .add-new-task-popup button[type=submit]:active
 {
   box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.67) !important;
-  background-color: rgb(90, 139, 227);
+  background-image: linear-gradient(135deg, rgb(82, 106, 214) 0%, rgb(98, 55, 142) 100%);
 }
 
-
-
-.inputErrorInfo {
+.input-error-info {
   display: flex;
   height: 18px;
   font-size: 12px;
@@ -353,7 +407,62 @@ background-color: #eee;
   color: #dc3545;
 }
 
-footer {
-  height: 5%;
-  max-height: 5%;
-}/*# sourceMappingURL=style.css.map */
+.credits
+{
+  position:fixed;
+  bottom:0;
+  font-size:11px;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  width:100%;
+}
+
+.credits a
+{
+  background-image: linear-gradient(135deg, rgb(62, 86, 194) 0%, rgb(78, 35, 122) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.credits a:hover
+{
+  background-image: linear-gradient(135deg, rgb(42, 66, 174) 0%, rgb(58, 15, 102) 100%);
+}
+
+.credits a:active
+{
+  background-image: linear-gradient(135deg, rgb(32, 56, 164) 0%, rgb(48, 5, 92) 100%);
+}
+
+svg {
+  display: block;
+  margin: 0 auto;
+  border-radius:100%;
+}
+
+.tick {
+  stroke-dasharray: 44;
+  stroke-dashoffset: 44;
+}
+
+.open .retract {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation: retract 0.4s ease-in-out forwards;
+}
+
+.open .tick {
+  animation: dash 0.4s ease-in-out forwards;
+}
+
+.show .retract {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+}
+
+.show .tick {
+  stroke-dashoffset: 0;
+}
+
+/*# sourceMappingURL=style.css.map */
