@@ -57,6 +57,7 @@ body {
   font-size:11px;
   vertical-align: middle;
 }
+
 .main-wrapper {
   height: 100vh;
   background-color: #eee;
@@ -138,7 +139,7 @@ body {
   margin-bottom: 5px;
   box-shadow: 0px 0px 7px -4px rgba(0, 0, 0, 0.67);
   opacity:1;
-
+  position:relative;
 }
 
 .task-info-wrapper {
@@ -165,13 +166,89 @@ body {
   text-overflow: ellipsis;
   margin: 0;
   font-weight: 700;
+  position:relative;
+  transition: color 0.4s;
+  background-color: rgba(0,0,0,0)!important;
 }
 
+.done
+{
+ color: gray;
+}
+.donenoanimate
+{
+  color: gray;
+  background-color: gray;
+}
+
+.task-info-title::after, .task-info-desc::after, .deadline-badge::after{
+
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0%;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.25s ease;
+}
+
+@keyframes width0to100
+{
+  from{
+    width:0%;
+    
+  }
+  to
+  {
+    width:100%;
+  }
+}
+
+@keyframes width0to100-12px
+{
+  from{
+    width:0%;
+  }
+  to
+  {
+    width: calc(100% - 12px);
+  }
+}
+.task-info-title.done::after, .task-info-desc.done::after{
+  animation: width0to100 0.5s  forwards;
+}
+
+.deadline-badge.done::after
+{
+  left:6px;
+  animation: width0to100-12px 0.5s forwards;
+}
+
+.task-info-title.donenoanimate::after, .task-info-desc.donenoanimate::after{
+  width:100%;
+}
+
+.deadline-badge.donenoanimate::after
+{
+  left:6px;
+  width: calc(100% - 12px);
+}
+
+.task-info-desc-wrapper
+{
+  display:flex;
+  align-items: center;
+}
 .task-info-desc {
   margin: 0.25em 0 0 0;
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
+  position:relative;
+  transition: color 0.4s;
+  background-color: rgba(0,0,0,0)!important;
 }
 
 .deadline-badge {
@@ -190,9 +267,13 @@ body {
   align-items: center;
   text-align: center;
   white-space: nowrap;
+  position:relative;
+  transition: color 0.4s;
+  transition: background-color 0.4s;
 }
 
 .deadline-badge-expired {
+  background-image: none;
   background-color: #dc3545;
 }
 

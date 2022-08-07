@@ -13,6 +13,7 @@ let taskListPlaceholderEmpty, taskListPlaceholderDone;
 
 document.addEventListener('DOMContentLoaded', () => {
 
+
     mainWrapper = document.getElementById('mainWrapper');
     mainWrapper.style.height = `${window.innerHeight}px`;
     window.addEventListener('resize', ()=>{mainWrapper.style.height = `${window.innerHeight}px`;});
@@ -33,6 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
     newTaskPopupForm.elements[0].addEventListener('click', toggleNewTaskPopup);
 
     initializeTasksTab();
+
+    console.log((60 - new Date().getSeconds()) * 1000);
+    setTimeout(()=>{ //to trzeba zrobić asynchronicznie!
+        findExpiredTasks(tasksTab);
+        setInterval(()=>{
+            findExpiredTasks(tasksTab);
+        }, 60010)
+    }, (60 - new Date().getSeconds()) * 1000);
 });
 
 const initializeTasksTab = ()=> {
@@ -107,7 +116,8 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
 
             let li = document.createElement('li');
             let wrapperDivLeft = document.createElement('div');
-            let div = document.createElement('div');
+            let div1 = document.createElement('div');
+            let div2 = document.createElement('div');
             let badgeSpan = document.createElement('span');
             let h6 = document.createElement('h6');
             let p = document.createElement('p');
@@ -119,7 +129,8 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
             li.dataset.taskId = index;        
             wrapperDivLeft.classList.add('task-info-wrapper');
             wrapperDivRight.classList.add('task-done-btn-wrapper');
-            div.classList.add('task-info-title-wrapper');
+            div1.classList.add('task-info-title-wrapper');
+            div2.classList.add('task-info-desc-wrapper');
             h6.classList.add('task-info-title');
             button.classList.add('task-done-btn');
             button.innerHTML = `
@@ -142,29 +153,39 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
 
             if(task.deadlineDate || task.deadlineTime)
             {
+
                 
                 badgeSpan.classList.add('deadline-badge');
                 
                 let today = new Date(Date.now()).toISOString().slice(0,10);
-                if(task.deadlineDate === today)
+                let tomorrow = new Date(Date.now() + 86400000).toISOString().slice(0,10);
+                if(task.deadlineDate === today) //tu jest problem prawdopodobnie kwestia strefy czasowej today np. o 1:01 zawiera datę dzień przed
                 {
+                    
                     badgeSpan.innerText = 'Dzisiaj';
                 }
+                else if(task.deadlineDate === tomorrow)
+                {
+                    badgeSpan.innerText = 'Jutro';
+                }
                 else{
-                    badgeSpan.innerText = task.deadlineDate;
+                    if(task.deadlineDate) badgeSpan.innerText = convertDateToDDMMYYY(task.deadlineDate);
                 }
 
                 badgeSpan.innerText+=` ${task.deadlineTime}`;
+                if(task.expired)
+                {
+                    badgeSpan.classList.add('deadline-badge-expired');
+                    li.style.color = '#dc3545';
+                }
             }
             h6.innerText = task.title;
 
             if(task.done) 
             {
-                div.style.textDecoration = 'line-through';
-                p.style.textDecoration = 'line-through';
-                if(task.deadlineDate || task.deadlineTime) badgeSpan.classList.add('deadline-badge-done');
-                div.style.color = 'gray';
-                p.style.color = 'gray';
+                // div1.style.textDecoration = 'line-through';
+                // p.style.textDecoration = 'line-through';
+
                 wrapperDivLeft.classList.add('done-task-info-wrapper');
 
                 let rmvbutton = document.createElement('button');
@@ -179,23 +200,29 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
                 {
                     rmvspan.classList.add('material-symbols-outlined-fade-in');
                     button.classList.add('open');
+                    h6.classList.add('done');
+                    p.classList.add('done'); 
+                    if(task.deadlineDate || task.deadlineTime) badgeSpan.classList.add('deadline-badge-done', 'done');
                 }
                 else{
                     button.classList.add('show');
+                    h6.classList.add('donenoanimate');
+                    p.classList.add('donenoanimate'); 
+                    if(task.deadlineDate || task.deadlineTime) badgeSpan.classList.add('deadline-badge-done', 'donenoanimate');
                 }
                 rmvbutton.appendChild(rmvspan);
                 wrapperDivRight.appendChild(rmvbutton);
             }
 
-            div.appendChild(badgeSpan);
-            div.appendChild(h6);
-            wrapperDivLeft.appendChild(div);
+            div1.appendChild(badgeSpan);
+            div1.appendChild(h6);
             if(task.description.trim().length > 0)
             {
                 p.classList.add('task-info-desc');
                 p.innerText = task.description;
-                wrapperDivLeft.appendChild(p);
+                div2.appendChild(p);
             }
+            wrapperDivLeft.append(div1, div2);
 
             
             wrapperDivRight.appendChild(button);
@@ -217,9 +244,26 @@ const addNewTask = (event) => {
             "deadlineDate": event.target.elements[3].value,
             "deadlineTime": event.target.elements[4].value,
             "done": false,
-            "animate": true
+            "animate": true,
+            "expired": false,
+            "ISODeadline": '3000-12-31T23:59'
         };
         tasksTab.push(task);
+        if(event.target.elements[3].value && event.target.elements[4].value)
+        {
+            task.ISODeadline = event.target.elements[3].value + 'T' + event.target.elements[4].value;
+        }
+        else if(event.target.elements[3].value || event.target.elements[4].value)
+        {
+            if(event.target.elements[3].value) 
+            {
+                task.ISODeadline = event.target.elements[3].value + 'T' + '23:59';
+            }
+            else if(event.target.elements[4].value)
+            {
+                task.ISODeadline = new Date().toISOString().slice(0,10) + 'T' + event.target.elements[4].value;
+            }
+        }
         saveTasksTabToLocalStorage();
 
         generateTaskListDOM(tasksTab);
@@ -277,3 +321,62 @@ const resetForm = () =>
         elem.innerText='';
     });
 } 
+
+
+const convertDateToDDMMYYY = (date)=>
+{
+    return date.slice(8,10) + '-' + date.slice(5,7) + '-' + date.slice(0,4);
+}
+
+// const convertDateFromDDMMYYYYToISO = (date)=>
+// {
+//     return date.slice(6,10) + '-' + date.slice(3,5) + '-' + date.slice(0,2);
+// }
+
+const getDateByZone = (zone) => {
+    return fetch(`https://timeapi.io/api/Time/current/zone?timeZone=${zone}`)
+           .then( (resp) => { return resp.json();})
+           .then( data => {
+                return data.dateTime;
+            });
+}
+
+const isTaskExpired = async (task)=>
+{
+    let todayDate = await getDateByZone('Europe/Warsaw');
+    let nowUnixTime = Date.parse(todayDate.slice(0,16));
+    
+    if(task.deadlineDate && task.deadlineTime) 
+    {
+        console.log(nowUnixTime > Date.parse(task.deadlineDate+'T'+task.deadlineTime));
+        return (nowUnixTime > Date.parse(task.deadlineDate+'T'+task.deadlineTime))
+    }
+    else if(task.deadlineDate)
+    {
+        return (nowUnixTime > Date.parse(task.deadlineDate+'T23:59'))
+    }
+    else if (task.deadlineTime)
+    {
+        return (nowUnixTime > Date.parse(new Date().toISOString().split('T')[0]+'T'+task.deadlineTime))
+    }
+    else return false;
+}
+
+const findExpiredTasks = async (tab) =>
+{
+    let expiredTasks = false;
+    for(let task of tab){
+        if(await isTaskExpired(task))
+        {
+            task.expired = true;
+            expiredTasks = true;
+        } 
+    }
+    if(expiredTasks) generateTaskListDOM(tasksTab);
+}
+
+const sortTasksByDeadline = (tab)=>
+{
+    tab.sort((a,b) => Date.parse(b.ISODeadline) - Date.parse(a.ISODeadline));
+}
+
