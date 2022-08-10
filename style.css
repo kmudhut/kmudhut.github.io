@@ -250,6 +250,7 @@ body {
   position:relative;
   transition: color 0.4s;
   background-color: rgba(0,0,0,0)!important;
+  white-space: nowrap;
 }
 
 .deadline-badge {
