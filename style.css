@@ -140,6 +140,7 @@ body {
   box-shadow: 0px 0px 7px -4px rgba(0, 0, 0, 0.67);
   opacity:1;
   position:relative;
+  max-height: 300px;
 }
 
 .task-info-wrapper {

@@ -219,7 +219,15 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
             if(task.description.trim().length > 0)
             {
                 p.classList.add('task-info-desc');
-                p.innerText = task.description;
+                if(task.done) {
+                    p.innerText = task.oneLineDescription;
+                    p.style.maxHeight = '1.4em';
+                }
+                else 
+                {
+                    p.innerText = task.description;
+                }
+                
                 div2.appendChild(p);
             }
             wrapperDivLeft.append(div1, div2);
@@ -246,8 +254,10 @@ const addNewTask = (event) => {
             "done": false,
             "animate": true,
             "expired": false,
-            "ISODeadline": '3000-12-31T23:59'
+            "ISODeadline": '3000-12-31T23:59',
+            "oneLineDescription": event.target.elements[2].value.replaceAll('\n', ' ')
         };
+        task.description = replaceStartingFromNOccur(task.description, 3, '\n', ' ');
         tasksTab.push(task);
         if(event.target.elements[3].value && event.target.elements[4].value)
         {
@@ -378,5 +388,26 @@ const findExpiredTasks = async (tab) =>
 const sortTasksByDeadline = (tab)=>
 {
     tab.sort((a,b) => Date.parse(b.ISODeadline) - Date.parse(a.ISODeadline));
+}
+
+const replaceStartingFromNOccur = (str, n, char, rplcwith)=>
+{
+	let indexesOfChar = [];
+    let tmpStr = [...str];
+
+    for(let i = 0; i<tmpStr.length; i++)
+    {
+        if(tmpStr[i] == char)
+        {
+            indexesOfChar.push(i);
+            if(indexesOfChar.length >= n)
+            { 
+                console.log(tmpStr);
+                tmpStr[i] = rplcwith; 
+                console.log(tmpStr);
+            }	
+        }
+    }
+    return tmpStr.join('');
 }
 
