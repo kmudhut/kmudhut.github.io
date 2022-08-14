@@ -275,6 +275,7 @@ const addNewTask = (event) => {
             }
         }
         saveTasksTabToLocalStorage();
+        
 
         generateTaskListDOM(tasksTab);
         setTimeout(resetForm, 500);
