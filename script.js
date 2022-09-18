@@ -221,7 +221,7 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
                 p.classList.add('task-info-desc');
                 if(task.done) {
                     p.innerText = task.oneLineDescription;
-                    p.style.maxHeight = '1.4em';
+                    p.style.maxHeight = '1.5em';
                 }
                 else 
                 {
@@ -276,7 +276,6 @@ const addNewTask = (event) => {
         }
         saveTasksTabToLocalStorage();
         
-
         generateTaskListDOM(tasksTab);
         setTimeout(resetForm, 500);
     }
