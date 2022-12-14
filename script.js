@@ -35,13 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initializeTasksTab();
 
-    console.log((60 - new Date().getSeconds()) * 1000);
-    setTimeout(()=>{ //to trzeba zrobić asynchronicznie!
-        findExpiredTasks(tasksTab);
-        setInterval(()=>{
-            findExpiredTasks(tasksTab);
-        }, 60010)
-    }, (60 - new Date().getSeconds()) * 1000);
+    // console.log((60 - new Date().getSeconds()) * 1000);
+    // setTimeout(()=>{ //to trzeba zrobić asynchronicznie!
+    //     findExpiredTasks(tasksTab);
+    //     setInterval(()=>{
+    //         findExpiredTasks(tasksTab);
+    //     }, 60010)
+    // }, (60 - new Date().getSeconds()) * 1000);
 });
 
 const initializeTasksTab = ()=> {
@@ -214,7 +214,7 @@ const generateTaskListDOM = (tasksTab)=> //podobno lepiej zamiast takiego inner 
                 wrapperDivRight.appendChild(rmvbutton);
             }
 
-            div1.appendChild(badgeSpan);
+            if(task.deadlineDate || task.deadlineTime) div1.appendChild(badgeSpan);
             div1.appendChild(h6);
             if(task.description.trim().length > 0)
             {
@@ -338,57 +338,57 @@ const convertDateToDDMMYYY = (date)=>
     return date.slice(8,10) + '-' + date.slice(5,7) + '-' + date.slice(0,4);
 }
 
-// const convertDateFromDDMMYYYYToISO = (date)=>
-// {
-//     return date.slice(6,10) + '-' + date.slice(3,5) + '-' + date.slice(0,2);
+// // const convertDateFromDDMMYYYYToISO = (date)=>
+// // {
+// //     return date.slice(6,10) + '-' + date.slice(3,5) + '-' + date.slice(0,2);
+// // }
+
+// const getDateByZone = (zone) => {
+//     return fetch(`https://timeapi.io/api/Time/current/zone?timeZone=${zone}`)
+//            .then( (resp) => { return resp.json();})
+//            .then( data => {
+//                 return data.dateTime;
+//             });
 // }
 
-const getDateByZone = (zone) => {
-    return fetch(`https://timeapi.io/api/Time/current/zone?timeZone=${zone}`)
-           .then( (resp) => { return resp.json();})
-           .then( data => {
-                return data.dateTime;
-            });
-}
-
-const isTaskExpired = async (task)=>
-{
-    let todayDate = await getDateByZone('Europe/Warsaw');
-    let nowUnixTime = Date.parse(todayDate.slice(0,16));
+// const isTaskExpired = async (task)=>
+// {
+//     let todayDate = await getDateByZone('Europe/Warsaw');
+//     let nowUnixTime = Date.parse(todayDate.slice(0,16));
     
-    if(task.deadlineDate && task.deadlineTime) 
-    {
-        console.log(nowUnixTime > Date.parse(task.deadlineDate+'T'+task.deadlineTime));
-        return (nowUnixTime > Date.parse(task.deadlineDate+'T'+task.deadlineTime))
-    }
-    else if(task.deadlineDate)
-    {
-        return (nowUnixTime > Date.parse(task.deadlineDate+'T23:59'))
-    }
-    else if (task.deadlineTime)
-    {
-        return (nowUnixTime > Date.parse(new Date().toISOString().split('T')[0]+'T'+task.deadlineTime))
-    }
-    else return false;
-}
+//     if(task.deadlineDate && task.deadlineTime) 
+//     {
+//         console.log(nowUnixTime > Date.parse(task.deadlineDate+'T'+task.deadlineTime));
+//         return (nowUnixTime > Date.parse(task.deadlineDate+'T'+task.deadlineTime))
+//     }
+//     else if(task.deadlineDate)
+//     {
+//         return (nowUnixTime > Date.parse(task.deadlineDate+'T23:59'))
+//     }
+//     else if (task.deadlineTime)
+//     {
+//         return (nowUnixTime > Date.parse(new Date().toISOString().split('T')[0]+'T'+task.deadlineTime))
+//     }
+//     else return false;
+// }
 
-const findExpiredTasks = async (tab) =>
-{
-    let expiredTasks = false;
-    for(let task of tab){
-        if(await isTaskExpired(task))
-        {
-            task.expired = true;
-            expiredTasks = true;
-        } 
-    }
-    if(expiredTasks) generateTaskListDOM(tasksTab);
-}
+// const findExpiredTasks = async (tab) =>
+// {
+//     let expiredTasks = false;
+//     for(let task of tab){
+//         if(await isTaskExpired(task))
+//         {
+//             task.expired = true;
+//             expiredTasks = true;
+//         } 
+//     }
+//     if(expiredTasks) generateTaskListDOM(tasksTab);
+// }
 
-const sortTasksByDeadline = (tab)=>
-{
-    tab.sort((a,b) => Date.parse(b.ISODeadline) - Date.parse(a.ISODeadline));
-}
+// const sortTasksByDeadline = (tab)=>
+// {
+//     tab.sort((a,b) => Date.parse(b.ISODeadline) - Date.parse(a.ISODeadline));
+// }
 
 const replaceStartingFromNOccur = (str, n, char, rplcwith)=>
 {
