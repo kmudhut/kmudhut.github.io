@@ -523,6 +523,8 @@ svg {
   display: block;
   margin: 0 auto;
   border-radius:100%;
+  width:25px;
+  height:25px;
 }
 
 .tick {
